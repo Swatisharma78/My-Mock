@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Car</title>
+</head>
+<body>
+  <div id="nav">
+    <img id="img" src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f697.svg"/>
+    <a href="./index.html" id="nav1">Ad</a>
+    <a href="./car.html" id="nav1">Car</a>
+    <a href="./wishlist.html" id="nav1">Wishlist</a>
+</div> 
+    <h1 style="color: red;align-content: center">CAR PAGE</h1>
+    <div id="carupper">
+     <p class="para">price</p>
+     <select name="Price" id="sortprice" onchange="sortprice()">
+     <option value="lth">Low to hight</option>
+ <option value="htl">high to low</option></select>
+ 
+ <p class="para">KM</p>
+ <select name="kms" id="km">
+     <option value="lth">2000km</option>
+     <option value="htl">5000km</option></select>
+ </select>
+ <p class="para">Car brand</p>
+ <select name="brand" id="brand-car">
+     <option value="lth">Tata</option>
+     <option value="htl">Toyota</option>
+     <option value="lth">Tata</option>
+     <option value="htl">Toyota</option>
+    </select>
+ </select>
+    </div>
+     <div id="cars"></div>
+</body>
+</html>
+<script>
+   let alldata=[]
+const getcar=async()=>{
+    let res= await fetch(`https://mock5fakejson.herokuapp.com/cars`)
+    let data=await res.json()
+    alldata.push(data)
+    display(data)
+}
+console.log("all ",alldata)
+getcar()
+const display=(data)=>{
+    document.getElementById('cars').innerHTML=null
+    data.forEach((el)=>{
+      let card=document.createElement('div')
+      card.className="card"
+        let image=document.createElement('img')
+        image.src="https://imgd-ct.aeplcdn.com/370x208/n/cw/ec/42355/xuv700-exterior-right-front-three-quarter.jpeg?isig=0&q=75"
+        let namediv=document.createElement('div');
+        namediv.className = 'namediv';
+        let year=document.createElement('h3')
+        year.innerText=el.year
+        let brands=document.createElement('h3')
+        brands.innerText=el.brand
+       let typ=document.createElement('p')
+       typ.innerText=el.type
+       let div1=document.createElement('div')
+       div1.append(typ)
+       typ.style.color="black"
+
+       let price=document.createElement('p')
+       price.style.color="black"
+       price.innerText= "$"+el.Price
+       let div2=document.createElement('div')
+       div2.append(price)
+       let kmz=document.createElement('p')
+       kmz.innerText=el.kms+"/km"
+       kmz.style.color="black"
+       let div3=document.createElement('div')
+       div3.append(kmz)
+       let divlex=document.createElement('div')
+       divlex.className="divlex"
+       divlex.append(div1,div2,div3)
+       let btndiv=document.createElement('div')
+       btndiv.classList="like-button"
+       let edit=document.createElement('button')
+       edit.innerText="Edit"
+       let dele=document.createElement('button')
+       dele.innerText="delete"
+       dele.addEventListener('click', function (e) {
+        e.preventDefault();
+        console.log(el.id)
+        fetch(`https://mock5fakejson.herokuapp.com/cars/${el.id}`, {
+          method: 'DELETE',
+          header: {
+            'content-type': 'application/json',
+          },
+        })
+          .then((r) => r.json()) });
+       let like=document.createElement('button')
+       like.innerText="❤️"
+       like.addEventListener('click', (e) => {
+        e.preventDefault();
+        fetch(`https://mock5fakejson.herokuapp.com/cars/${el.id}`).then((r)=>r.json()).then((r)=>{wishlist(r)})   })
+      const wishlist =(r)=>{
+        fetch(`https://mock5fakejson.herokuapp.com/wishlisted_cars`,{
+    method: 'POST',
+  body: JSON.stringify(r),
+  headers: {  'Content-Type': 'application/json'  } })  }
+       btndiv.append(edit,dele,like)
+        namediv.append(year,brands)
+        let des=document.createElement('h5')
+        des.innerText=el.Description
+        card.append(image,namediv,divlex,des,btndiv)
+        document.getElementById("cars").append(card)
+    })
+}
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css">
+    <title>LOGIN</title>
+</head>
+<body>
+    <div id="nav">
+        <a href="./login.html" id="nav1">LOGIN</a>
+        <a href="./data.html" id="nav1">DATA</a>
+        <a href="./reports.html" id="nav1">REPORTS</a>
+    </div>
+    <div style="margin-top:100px;">
+        <h1 id="mainLogin">Login Details</h1>
+        <div id="loginMainDiv">
+            <form id="form">
+                <p>USER NAME</p>
+                <input type="text" placeholder="Enter Username" id="user" />
+                <p>PASSWORD</p>
+                <input type="text" placeholder="Enter Password" id="pass" />
+                <br />
+                <input id="submit" type="submit" />
+            </form>
+        </div></div></body>
+</html>
+<script>
+    var token = JSON.parse(localStorage.getItem("UserTokenMock5"));
+    if (token) {
+        window.location.href = "./data.html"
+    } var loginFormdata = document.querySelector("form");
+    loginFormdata.addEventListener("submit", LoginFormSubmitting);
+    async function LoginFormSubmitting(event) {
+        event.preventDefault();
+        var user=loginFormdata.user.value;
+        var pass=loginFormdata.pass.value;
+        let obj = {
+            user,
+            pass,
+        }; let LoginRequest = await fetch("https://reqres.in/api/login", {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify(obj),
+            })  .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                alert("Login Successful !!")
+                localStorage.setItem('UserTokenMock5', JSON.stringify(res.token));
+                window.location.href = "./data.html"
+            })
+            .catch((res) => {
+                alert("Login Failed !!")
+                console.log(res);
+            });
+    }
+</script>

@@ -1,0 +1,279 @@
+body{
+    background-color: rgb(253, 245, 216);
+  }
+  * {
+      box-sizing: border-box;
+    }
+    body{
+      margin: 0px;
+      font-family: 'segoe ui';
+    } 
+    .nav{
+      height: 70px;
+      width: 100%;
+      background-color:rgb(10, 104, 38);
+      position: relative;
+    }
+    .nav>.nav2 {
+      display: inline;
+    }
+    .nav>.nav2>.nav3 {
+      display: inline-block;
+      font-size: 22px;
+      color: white;
+      padding: 10px 10px 10px 10px;
+    }
+    .nav>.navbtn{
+      display: none;
+    }
+    .nav>.all-links{
+      display: inline;
+      float: right;
+      font-size: 18px;
+      /* border:1px solid red; */
+    }
+    .nav>.all-links>a{
+      display: inline-block;
+      padding: 13px 10px 13px 10px;
+      text-decoration: none;
+      color: #ffffff;
+    }
+    .nav > .all-links > a:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    .nav > #navbarmain {
+      display: none;
+    } 
+    @media (max-width:600px) {
+      .nav > .navbtn {
+        display: inline-block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+      }
+      .nav > .navbtn > label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 13px;
+      }
+      .nav > .navbtn > label:hover,.nav  #navbarmain:checked ~ .navbtn > label {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+      .nav > .navbtn > label > span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #eee;
+      }
+      .nav > .all-links {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: rgb(169, 220, 229);
+     overflow-y: hidden;
+        left: 0px;
+      }
+      .nav > .all-links > a {
+        display: block;
+        width: 100%;
+      }
+      .nav > #navbarmain:not(:checked) ~ .all-links {
+        height: 0px;
+      }
+      .nav > #navbarmain:checked ~ .all-links {
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+      }
+    }
+    #main{
+      margin-left: 35%;
+      height: 570px;
+      width: 470px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: rgba(150, 150, 150, 0.24) 10px 10px 8px;
+      border-radius: 12px;
+  }
+  input{
+  border: none;  
+  height: 40px;
+  margin-left: 30%;
+  margin-top: 20px;
+  width: 200px;
+  border-bottom: 1px solid grey;
+  }
+  #profession{
+      margin-left: 30%;
+      bottom: none;
+      border-bottom: 2px solid grey;
+      height: 30px;
+  }
+  #batc{
+      margin-left: 140px;
+      height: 40px;
+  }
+  .h1{
+    color:rgb(10, 104, 38); 
+    margin-left: 30%;
+    padding-top: 50px;
+  }
+   #submit{
+    margin-top:50px;
+    background-color:rgb(10, 104, 38);
+    font-size:20px;
+    color:white;
+    height:50px;
+    border-radius: 10px ;
+   }
+   #maindiv{
+  margin-top: 100px;
+  margin-left: 35%;
+  width: 450px;
+  height: 500px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(150, 150, 150, 0.24) 10px 10px 8px;
+   }
+   .p{
+    margin-left: 30%;
+    margin-bottom: -10px;
+   }
+   #ldetail{
+    margin-left: 30%;
+    margin-top: 100px;
+   }
+   #nav {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    width: 100vw;
+    background-color: rgb(7, 76, 28);
+    left: 0;
+    top: 0;
+    padding: 20px;
+}
+
+#nav1{
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#nav1:hover {
+    color: rgb(11, 42, 32);
+}
+.maincard{
+  margin-top: 30px;
+  height: 400px;
+  width: 350px;
+  justify-content: center;
+  border-radius: 10px;
+  margin-left: 10%;
+}
+#mainreg{
+height: 140px;
+  background-color:rgb(253, 245, 216);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 65px;
+  gap: 30px;
+  width: 80%;
+  margin-left: 100px;
+}
+.usercard{
+    margin-top: 30px;
+    height: 400px;
+    width: 350px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    justify-content: center;
+    border-radius: 10px;
+    margin-left: 10%;
+}
+.usercard img{
+    border-radius: 50%;
+   
+}
+    #nav {
+      display: flex;
+      justify-content: space-around;
+      position: fixed;
+      width: 100vw;
+      background-color: rgb(7, 76, 28);
+      left: 0;
+      top: 0;
+      padding: 20px;
+  }
+  #nav1{
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      text-decoration: none;
+  }
+  #nav1:hover {
+      color: rgb(11, 42, 32);
+  }
+  #mainLogin{
+      text-align: center;
+      color: rgb(0, 112, 2);
+  }
+  #loginMainDiv{
+      border: none;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      width: fit-content;
+      padding: 40px;
+      margin: auto;
+      font-weight: 500;
+  }
+  #username, #password{
+      width: 250px;
+      height: 30px;
+      text-align: center;
+  }
+  #submit{
+      margin: auto;
+      padding: 10px 20px;
+      margin-top: 30px;
+      font-size: 16px;
+      background-color: rgb(3, 109, 19);
+      color: white;
+      border-radius: 5px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+  }
+  #submit:hover{
+      opacity: 1;
+  }
+  #user{
+    margin-left: -10px;
+  }
+  #pass{
+    margin-left: -10px;
+  }
+  #body{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+    margin-top: auto;
+}
+#search{
+width: 200px;
+}
+#search2{
+margin-left: 120px;
+}
+.mainS{
+  margin-top: 50px;
+  height: 550px;
+  width: 270px;
+  box-shadow: rgba(60, 59, 59, 0.35) 0px 5px 15px;
+  justify-content: center;
+  border-radius: 10px;
+  margin-left: 5%;
+  background-color: white;
+}

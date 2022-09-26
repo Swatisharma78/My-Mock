@@ -1,0 +1,22 @@
+.navdata{
+    display: flex;
+  justify-content: space-around;
+    height: 68px;
+    width: 100%;
+    background-color:rgb(0, 19, 128);
+    text-decoration: none;
+}
+.nav{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    margin-top: 15px;
+    text-decoration: none;
+    font-size:25px;
+    color: white;
+}
+.nav:hover{
+    color:rgb(217, 5, 5);
+}
+body{
+    background-color: rgb(231, 231, 231);
+}

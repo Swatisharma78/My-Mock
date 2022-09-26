@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Main Ad Page</title>
+</head>
+<body>
+  <div id="nav">
+    <img id="img" src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f697.svg"/>
+    <a href="./index.html" id="nav1">Ad</a>
+    <a href="./car.html" id="nav1">Car</a>
+    <a href="./wishlist.html" id="nav1">Wishlist</a>
+</div> 
+    <div id="box1">
+        <h1 id="h1">Masai Cars</h1>
+        <form id="form">
+            <div class="type">
+                <h2>Brand of car</h2>
+                <select name="carname" id="carname" class="mypage">
+                    <option value="Tata">Tata</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="MarutiSuzuki">Maruti Suzuki</option>
+                    <option value="Mahindra">Mahindra</option>
+                </select>
+            </div>
+            <div class="type">
+                <h2>Type</h2>
+                <select name="cartype" id="cartype" class="mypage">
+                    <option value="Manual ">Manual </option>
+                    <option value="Automated ">Automated </option>
+                </select>
+            </div>
+            <div class="type">
+                <h2>Year of purchase</h2>
+                <select name="caryear" id="caryear" class="mypage">
+                  <option value="2016 ">2013 </option>
+                  <option value="2014">2014 </option>
+                  <option value="2015">2015 </option>
+                    <option value="2016 ">2016 </option>
+                    <option value="2016 ">2017 </option>
+                    <option value="2016 ">2018 </option>
+                    <option value="2016 ">2019 </option>
+                    <option value="2016 ">2020 </option>
+                    <option value="2016 ">2021 </option>
+                    <option value="2016 ">2022 </option>
+                </select>
+            </div>
+            <div class="type">
+                <h2>Km driven</h2>
+                <input id="kmDriven" class="mypage" type="number" placeholder="kmDriven" />
+            </div>
+            <div class="type">
+                <h2>Description</h2>
+                <input id="Des" type="text"class="mypage" placeholder="Enter Description" />
+            </div>
+            <div class="type">
+                <h2>Price</h2>
+                <input id="price" type="number"class="mypage" placeholder="Enter Price" />
+            </div>
+            <input type="submit" id="submit" class="mypage"value="Submit" />
+        </form>
+    </div>
+    <div id="Modal" class="otp">
+     <div class="otpbox">
+            <span class="time">&times;</span>
+            <div class="fixingInput">
+                <h1>ENTER OTP</h1>
+                <div class="otpboxinput">
+     <input type="text" class="otp1" id="firstbox" maxlength="1" onkeyup="prenex(this,'secondbox')" />
+         <input type="text" class="otp2" id="secondbox" maxlength="1" onkeyup="prenex(this,'thirdbox')" />
+           <input type="text" class="otp3" id="thirdbox" maxlength="1" onkeyup="prenex(this,'fourthbox')" />
+          <input type="text" class="otp4" id="fourthbox" maxlength="1" />
+                </div>
+                <button id="confirmotp">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var mainBtn = document.getElementsByClassName("time")[0];
+    var otpdata = document.getElementById("Modal");
+          document.querySelector("#form").addEventListener("submit", (event) => {
+        event.preventDefault();
+ var carobject = {
+       brand:document.querySelector("#carname").value,
+      type:document.querySelector("#cartype").value,
+      year:document.querySelector("#caryear").value,
+       kms:document.querySelector("#kmDriven").value,
+       Des:document.querySelector("#Des").value,
+      Price:document.querySelector("#price").value,
+        }
+  otpdata.style.display = "block";
+    var submitbtnotp = document.querySelector("#confirmotp");
+   submitbtnotp.addEventListener("click", function () {
+     let Otp01 = document.querySelector(".otp1").value;
+     let Otp02 = document.querySelector(".otp2").value;
+   let Otp03 = document.querySelector(".otp3").value;
+    let Otp04 = document.querySelector(".otp4").value;
+   if (Otp01==1 && Otp02==2 && Otp03==3 && Otp04==4) {
+   postmainfun(carobject)
+      } else {
+       alert('OTP is wrong'); 
+     }
+      otpdata.style.display = "none";
+        });
+    });
+ mainBtn.addEventListener("click", function () {
+        otpdata.style.display = "none"
+ });
+ window.onclick =function (event) {
+if (event.target==otpdata) {
+   otpdata.style.display = "none"
+ }
+    };
+function prenex(prev,next) {
+if (prev.value.length) {
+      document.getElementById(next).focus()
+ }
+    }
+    const postmainfun = async (carobject) => {
+ const response = await fetch("https://mock5fakejson.herokuapp.com/cars", {
+     method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+     },
+       body: JSON.stringify(carobject),
+      }).then((res) => {
+   console.log(res)
+      alert('Your car data is sucessfully posted');
+   window.location.reload();
+    })
+  .catch((err) => console.log(err))
+    };
+</script>

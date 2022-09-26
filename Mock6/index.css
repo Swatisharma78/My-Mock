@@ -1,0 +1,181 @@
+body{
+    background-color: rgb(230, 253, 232);
+}
+#nav {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    width: 100vw;
+    background-color: rgb(8, 8, 169);
+    left: 0;
+    top: 0;
+    padding: 20px;
+}
+#nav1{
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 25px;
+}
+#nav1:hover {
+    color: rgb(11, 42, 32);
+}
+#img{
+ width: 60px;
+  margin-top: -25px;
+}
+.otp{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  margin: auto ;
+  text-align: center;
+}
+.otpbox {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width:400px;
+  border-radius: 10px;
+}    
+.fixingInput {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  align-items: space-around;
+  justify-content: center;
+}
+
+.otpboxinput {
+  display: flex;
+  justify-content: center;
+}
+
+.otpboxinput input {
+
+  height: 70px;
+    border: none;
+  width: 70px;
+  margin: 8px;
+  text-align: center;
+font-size: 40px;
+  background: #020594;
+  color: white;
+}
+
+
+#box1{
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: white;
+  margin-top: 120px;
+  width: 400px;
+  height: 620px;
+  margin-left: 550px;
+}
+
+.type{
+  display:grid;
+   margin-left: 40px;
+   font-size: 10px;
+}
+.mypage{
+  width: 300px;
+}
+#confirmotp{
+ padding: 5px ;
+ width: 100px;
+margin-left: 150px;
+background-color: #020594;
+color: white;
+}
+#h1{
+  font-size: 20px;
+  width: 190px;
+font-size: 30px;
+height: 50px;
+  margin-left: 120px;
+  text-align: center;
+  color: white;
+  background-color: #020594;
+}
+
+#submit{
+  width: 110px;
+  height: 30px;
+  font-size: 20px;
+  color: white;
+  background-color: #020594;
+  margin-top: 10px;
+  margin-left: 150px;
+}
+
+#mainform{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 10px;
+    width: fit-content;
+    margin: 50px auto;
+    gap: 15px;
+    margin-top: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+
+  }
+  input{
+    width: 400px;
+    height: 30px;
+    border: 2px solid rgb(74, 11, 133);;
+  }
+  select{
+    width: 410px;
+    height: 35px;
+    border: 2px solid rgb(74, 11, 133);;
+
+  }
+#km{
+  width: 150px;
+}
+#brand-car{
+  width: 150px;
+}
+#sortprice{
+  width: 150px;
+}
+#carupper{
+  display: flex;
+  margin-bottom:30px;
+  margin-left: 500px;
+margin-top: 30px;
+}
+.para{
+  font-size: 20px;
+  margin-top: -1px;
+}
+
+#cars{
+  display: grid;
+  grid-template-columns: repeat(3,300px);
+  grid-template-rows: auto;
+  justify-content: center;
+ gap: 80px;
+ text-align: center;
+ align-items: center;
+}
+.card{
+  /* border: 1px solid black; */
+  background-color: beige;
+  width:380px;
+  height: 550px;
+  gap: 90px;
+  box-shadow: 3px 5px 10px #888888;
+}
+.wishlist{
+  margin-top: 1000px;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Masai Mart</title>
+</head>
+<body>
+    <div class="nav">
+        <input type="checkbox" id="navbarmain">
+        <div class="nav2">
+        <div class="nav3">Masai Mart</div>
+        </div>
+        <div class="navbtn">
+        <label for="navbarmain">
+        <span></span>
+        <span></span>
+        <span></span>
+          </label>
+        </div>
+        <div class="all-links">
+          <a href="./index.html" >Product</a>
+          <a href="./wishlist.html" >Wishlist</a></div></div>
+         <div id="filter">
+            <h5>Filter By Category</h5>
+            <select name="role" id="Allproduct" onchange="Allproduct()">
+                <option value="default">select</option>
+                <option value="women">WOMEN</option>
+                <option value="men">MEN</option>
+                <option value="kids">KIDS</option>
+                <option value="homedecor">Home Decor</option>
+            </select>
+        </div>
+        <div id="container"></div>
+    <div id="pagination">
+        <button id="pg1">1</button>
+        <button id="pg2">2</button>
+        <button id="pg3">3</button>
+        <button id="pg4">4</button>
+    </div>
+    </body>
+</html>
+<script>
+var container = document.querySelector("#container");
+var wishlistArr = JSON.parse(localStorage.getItem("wishlistMasai")) || [];
+
+    appendpro()
+    function appendpro() {
+        container.innerHTML = ''
+        wishlistArr.forEach(function (el) {
+            let data = document.createElement("div")
+            data.setAttribute('id', 'data')
+            let image1 = document.createElement("img")
+            image1.setAttribute('id','image1')
+            image1.src =el.image;
+            let mini = document.createElement("div")
+            mini.setAttribute('id', 'mini')
+            let minidata = document.createElement("div")
+            minidata.setAttribute('id', 'minidata');
+            let title = document.createElement("p")
+            title.innerText = el.title;
+            let brand = document.createElement("p")
+            brand.innerText = el.brand;
+            let price = document.createElement("p")
+            price.innerText = "$"+el.price;
+            let mini2 = document.createElement("div")
+            mini2.setAttribute('id', 'mini2')
+            let wishlist = document.createElement("p")
+            wishlist.setAttribute('id', 'wishlist')
+            wishlist.innerText ="❤️";
+            let category = document.createElement("p")
+            category.innerText = el.category;
+            minidata.append(title, brand,price);
+            mini2.append(wishlist, category)
+            mini.append(minidata, mini2)
+            data.append(image1, mini)
+            container.append(data)
+        })
+    }
+</script>

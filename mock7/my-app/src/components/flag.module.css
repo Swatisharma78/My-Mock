@@ -1,0 +1,27 @@
+.box1{
+    display: grid;   
+    margin: auto;
+    margin-top: 70px;
+    gap:12px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    margin-left: 90px;
+}
+@media all and (min-width: 450px) and (max-width: 790px){
+    .box1{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media all and (min-width: 249px) and (max-width: 450px){
+    .box1{
+        grid-template-columns: 1fr;
+    }
+}
+.subbox{
+    background-color: white;
+    height: 200px;
+    width: 300px;
+    margin-top: 200px;
+    margin-left: 200px;
+    justify-content: center;
+}

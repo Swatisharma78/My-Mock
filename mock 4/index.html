@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+  <div id="navbar">
+    <a href="./index.html" id="navbartext">Home</a>
+    <a href="./login.html" id="navbartext">Login </a>
+    <a href="./register.html" id="navbartext">Register</a>
+    <a href="./employee.html" id="navbartext">Employees </a>
+</div>
+</body>
+</html>
+<script>
+  let login = async (e) => {
+  e.preventDefault();
+
+  let form_data = {
+    username: document.getElementById("username").value,
+    password: document.getElementById("password").value,
+  };
+  form_data = JSON.stringify(form_data);
+  console.log(form_data);
+  let res = await fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+    method: "POST",
+    body: form_data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  var userName = document.getElementById("username").value;
+  let data = await res.json();
+  console.log(data)
+  if (data.error == false) {
+    localStorage.setItem("userMockData",JSON.stringify(data))
+    localStorage.setItem("userNameMock",JSON.stringify(userName))
+    alert("Login Successful");
+  } else {
+    alert("Logi Unsuccessful");
+  }
+};
+document.getElementById("submit").addEventListener("click", login);
+</script>

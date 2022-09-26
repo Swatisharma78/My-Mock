@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">  
+    <title>Masai Employee</title>   
+</head>
+<body>
+  <div id="navbar">
+    <a href="./index.html" id="navbartext">Home</a>
+    <a href="./login.html" id="navbartext">Login </a>
+    <a href="./register.html" id="navbartext">Register</a>
+    <a href="./employee.html" id="navbartext">Employees </a>
+</div>
+   <div id="name">
+       
+    <input type="text" id="search" placeholder="Search..." onkeyup="search()"><button onclick="search()">search</button>
+    <select name="department" id="filter" onchange="department()">
+        <option value="default">Department</option>
+        <option value="Training">Training</option>
+        <option value="Product Management">Product Management</option>
+        <option value="Research and Development">Research and Development</option>
+        <option value="Services">Services</option>
+    </select>
+    <select name="salary" id="sort" onchange="sortbyvalue()">
+        <option value="desc">salary</option>
+        <option value="asc">Low to High</option>
+        <option value="desc">High to Low</option>
+    </select>
+<table id="first">
+    <thead>
+        <tr>
+           <th>Photo</th>
+           <th>Name</th>
+           <th>Departments</th>
+           <th>gender</th>
+           <Th>Salary</Th>
+        </tr>
+       </thead>
+       <tbody id="body">
+
+       </tbody>
+</table>
+<img src="https://imgur.com/9xEcfJj" alt="" srcset="">
+    <div id="pagination">
+        <button id="page1">1</button>
+        <button id="page2">2</button>
+        <button id="page3">3</button>
+        <button id="page4">4</button>
+        <button id="page5">5</button>
+        <button id="page6">6</button>
+        <button id="page7">7</button>
+    </div>
+</div>
+<script>
+    var sort = 'desc';
+async function getdata(pageNo,sort) {
+    var url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=${pageNo}&limit=12&orderBy=${sort}`;
+    let data = await fetch(url)
+    let res = await data.json()
+    arr = res.data
+   console.log(arr)
+   dataappend(arr) 
+}
+getdata(1)
+ const dataappend=(data)=>{
+   document.getElementById("body").innerHTML=""
+   data.forEach((el)=>{
+    let tr=document.createElement("tr")
+    let photo=document.createElement("td")
+    let img=document.createElement("img")
+    let div= document.createElement("div")
+  img.className="img"
+    img.src=el.image;
+    div.append(img)
+    photo.append(div)
+    let name=document.createElement("td")
+    name.innerText=el.name
+let depart=document.createElement("td")
+depart.innerText=el.department
+let gender=document.createElement("td")
+gender.innerText=el.gender
+let salary=document.createElement("td")
+salary.innerText=el.salary
+tr.append(photo,name,depart,gender,salary)
+document.querySelector("#body").append(tr)
+   })
+ }
+var store = []
+async function storeAlData() {
+    for(var i=1; i<=10; i++){
+        var url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=${i}&limit=70&orderBy=desc`;
+        let data = await fetch(url)
+        let res = await data.json()
+        arr = res.data
+        store.push(...arr)
+    }
+}
+storeAlData();
+ function department(){
+    var role = document.querySelector("#filter").value;
+  
+    if(role=="default"){
+        getdata(1,"desc");
+    }else if(role=="Training" ){
+        let temp = store.filter((e,ind)=>e.department=="Training")
+        
+        dataappend(temp);
+    }else if(role=="Product Management"){
+        let temp =store.filter((e,ind)=>e.department=="Product Management")
+        dataappend(temp);
+    }else if(role=="Research and Development"){
+        let temp =store.filter((e,ind)=>e.department=="Research and Development")
+        dataappend(temp);
+    }else if(role=="Services"){
+        let temp =store.filter((e,ind)=>e.department=="Services")
+        dataappend(temp);
+    }
+}
+const sortbyvalue=()=>{
+    var sortby=document.querySelector("#sort").value;
+    if(sortby=="asc"){
+        let temp =store.sort((a,b)=>{return a.salary-b.salary})
+        dataappend(temp);
+    }
+    else if(sortby=="desc"){
+        let temp =store.sort((a,b)=>{return b.salary-a.salary})
+        dataappend(temp);
+    }
+}
+const search=()=>{
+    let val=document.getElementById("search").value;
+
+   let temp=store.filter((el)=>{ return el.name.toLowerCase().includes(val.toLowerCase())})
+   console.log(temp)
+   dataappend(temp);
+}
+
+ var page1 = document.querySelector("#page1");
+ var page2 = document.querySelector("#page2");
+ var page3 = document.querySelector("#page3");
+ var page4 = document.querySelector("#page4");
+ var page5 = document.querySelector("#page5");
+ var page6 = document.querySelector("#page6");
+ var page7 = document.querySelector("#page7");
+
+ page1.addEventListener('click',function(){getdata(1)});
+ page2.addEventListener('click',function(){getdata(2)});
+ page3.addEventListener('click',function(){getdata(3)});
+ page4.addEventListener('click',function(){getdata(4)});
+
+ page5.addEventListener('click',function(){getdata(5)});
+ page6.addEventListener('click',function(){getdata(6)});
+ page7.addEventListener('click',function(){getdata(7)});
+</script>
+
+</body>
+</html>

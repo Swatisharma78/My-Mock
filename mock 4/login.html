@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>login</title>
+    <style>  
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <a href="./index.html" id="navbartext">Home</a>
+        <a href="./login.html" id="navbartext">Login </a>
+        <a href="./register.html" id="navbartext">Register</a>
+        <a href="./employee.html" id="navbartext">Employees </a>
+    </div>
+    <div class="register">
+        <form id="register-form">
+            <p>Username</p>
+            <input type="text" placeholder="Enter your Username" id="username" />
+            <br />
+            <p>Password</p>
+            <input type="password" placeholder="Enter your password" id="password" />
+            <br />
+            <input id="submit" type="submit" value='SUBMIT' />
+        </form>
+    </div>
+</body>
+
+</html>
+<script>
+    var token = JSON.parse(localStorage.getItem("UserToken"));
+    let username = JSON.parse(localStorage.getItem("username"));
+    if (token && username) {
+        window.location.href = "./index.html"
+    }
+    var inputData = document.querySelector("form");
+    inputData.addEventListener("submit", registrationForm);
+    async function registrationForm(event) {
+        event.preventDefault();
+        var username = inputData.username.value;
+        var password = inputData.pass.value;
+        var dataObj = {
+            username,
+            password
+        };
+        fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(dataObj),
+        })
+        .then((res)=>res.json())
+        .then((e)=>{
+            console.log(e)
+            if(e.error){
+                alert("Invalid login creadentials");
+            }else{
+                alert("Login Successful !!")
+                localStorage.setItem('UserToken', JSON.stringify(e.token));
+                localStorage.setItem('username', JSON.stringify(username));
+                window.location.href="./index.html";
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            alert('Registration failed, user already exists');
+        })
+    }
+</script>

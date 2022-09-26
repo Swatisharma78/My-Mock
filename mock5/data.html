@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+
+<body>
+  <div id="nav">
+    <a href="./login.html" id="nav1">LOGIN</a>
+    <a href="./data.html" id="nav1">DATA</a>
+    <a href="./reports.html" id="nav1">REPORTS</a>
+</div> <div id="mainreg">
+        <div><h1>Masai Alumine</h1></div>
+        <div><input type="text" id="search" onkeyup="mainS()">
+          <button id="search2" onclick="mainS();">search</button></div>
+        <div>
+            <select name="" id="batchfitrer" onchange="filterdata()">
+                <option value="">Batch</option>
+                <option value="web=16">web-16</option>
+                <option value="web-17">web-17</option>
+                <option value="web-18">web-18</option>
+                <option value="web-17">WB-19</option>
+                <option value="web-18">WB-20</option>
+            </select>
+        </div><div><select name="" id="sortage" onchange="sortage()">
+                <option value="">Age</option>
+                <option value="lh">Low to high</option>
+                <option value="hl">High to Low</option></select></div></div>
+    <div id="body"></div>
+</body>
+</html>
+<script>
+    let arr=[]
+    const user= async()=>{
+        let res=await fetch('https://swatijsonserver28.herokuapp.com/users');
+        let data= await res.json();
+        arr.push(...data);
+        mymaindata(data)
+    }
+    console.log(arr)
+    user()
+ const mymaindata=(data)=>{
+   document.querySelector("#body").innerHTML=null
+    data.forEach((el)=>{
+        let main=document.createElement("div")
+        main.className="mainS"
+        let img=document.createElement("img")
+        img.src="https://icon2.cleanpng.com/20180320/hje/kisspng-computer-icons-user-iconfinder-symbol-account-profile-icon-5ab1460abcd3c5.8200973615215672427734.jpg"
+        let name=document.createElement("p")
+        name.innerText="Name"+"-"+ el.name
+        let place=document.createElement("p")
+        place.innerText="Place"+"-"+el.place
+        let age=document.createElement("p")
+        age.innerText="Age"+"-"+el.age
+        let pro=document.createElement("p")
+        pro.innerText="Proffession"+"-"+el.profession
+        let batch=document.createElement("p")
+        batch.innerText="Batch"+"-"+el.batch_name
+        let div=document.createElement("div")
+        let edit = document.createElement("button")
+        edit.innerText="Edit"
+        let dele=document.createElement("button")
+        dele.innerText="Delete"
+        dele.addEventListener('click', function (e) {
+      e.preventDefault();
+      console.log(el.id)
+      fetch(`https://swatijsonserver28.herokuapp.com/users/${el.id}`, {
+        method: 'DELETE',
+        header: {
+          'content-type': 'application/json',
+        },
+      }) .then((r) => r.json()) ;
+    });
+        div.append(edit,dele)
+        main.append(img,name,pro,batch,place,age,div)
+        document.getElementById("body").append(main)
+    })
+ }
+ const sortage=()=> {
+  let ageval = document.getElementById('sortage');
+  if (ageval.value == 'lh') {
+    let newarr=arr.sort((a, b) => a.age - b.age);
+    mymaindata(newarr);
+  } else if (ageval.value == 'hl') {
+    newarr = arr.sort((a, b) => b.age - a.age);
+    mymaindata(newarr);
+  }
+}
+const filterdata =()=> {
+  let val = document.getElementById('batchfitrer').value;
+  let batch = arr.filter((el) => el.batch_name == val);
+  console.log(batch);
+  mymaindata(batch);
+}
+function mainS() {
+  let val = document.getElementById('search').value;
+  if(val){
+    let newdata = arr.filter((ele) => ele.name.toLowerCase().includes(val.toLowerCase()));
+    mymaindata(newdata);
+  }
+  else{
+    mymaindata(arr)
+  } 
+}
+</script>

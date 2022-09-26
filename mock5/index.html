@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="nav">
+        <input type="checkbox" id="navbarmain">
+        <div class="nav2">
+        <div class="nav3">Masaiverse Event</div>
+        </div>
+        <div class="navbtn">
+        <label for="navbarmain">
+        <span></span>
+        <span></span>
+        <span></span>
+          </label>
+        </div>
+        <div class="all-links">
+        <a href="./index.html">User</a>
+        <a href="./admin.html">Admin</a>
+        </div></div>
+        <div id="main">
+          <h1 class="h1">Register Form</h1>
+          <form action="" id="form">
+             <input type="text" placeholder="Name" id="name">
+              <input type="text" placeholder="Place" id="place">
+              <input type="number" placeholder="Age" id="age">
+              <select name="" id="batc" style="margin-top: 20px;height:20px;width:200px" onchange="batchfn()">
+                  <option value="">Batch</option>
+                  <option value="web-16">WB-16</option>
+                  <option value="web-17">WB-17</option>
+                  <option value="web-18">WB-18</option>
+                  <option value="web-17">WB-19</option>
+                  <option value="web-18">WB-20</option>
+              </select>
+              <select name="" id="profession"style="margin-top: 20px;height:20px;width:200px" onchange="professionfn()">
+                  <option value="">profession</option>
+                  <option value="frontend">Frontend Developer</option>
+                  <option value="backend">Backend Developer</option>
+                  <option value="full-stack">Full Stack Developer</option>
+              </select>
+              <br>
+              <input type="submit" value="Submit" id="submit" >
+          </form>
+      </div>
+</body>
+</html>
+
+<script>
+
+  let user=document.getElementById("form");
+  user.addEventListener("submit",(e)=>{
+      e.preventDefault();
+      let name=document.getElementById("name").value;
+      let place=document.getElementById("place").value;
+      let age=document.getElementById("age").value;
+      let batch=batchfn()
+      let pro=professionfn()
+     fetch(`https://swatijsonserver28.herokuapp.com/users`,{
+      method: 'POST',
+    body: JSON.stringify({
+      name: name,
+  age:age,
+  place:place,
+  batch_name: batch,
+  profession: pro
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+     })
+  })
+  
+  const batchfn=()=>{
+      return document.getElementById("batch").value
+  }
+  const professionfn=()=>{
+      return document.getElementById("profession").value}
+      
+</script>
